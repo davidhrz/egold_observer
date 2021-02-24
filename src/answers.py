@@ -11,7 +11,7 @@ def refresh_data():
     utils.fill_list_from_file(utils.advice_file, advice)
     utils.fill_list_from_file(utils.advice_queries_file, advice_queries)
     utils.fill_list_from_file(utils.quotes_file, quotes)
-    utils.fill_list_from_file(utils.quotes_authors_file, quote_authors)
+    utils.fill_list_from_file(utils.quote_authors_file, quote_authors)
 
 # Picks a random element from a list, deletes it from the list. Refills list if
 # no elements are left in the list.

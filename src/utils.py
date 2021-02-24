@@ -9,7 +9,7 @@ with open("token/google_dev_key.txt") as file:
 
 advice_queries_file = "data/advice_queries.txt"
 quotes_file = "data/quotes.txt"
-quotes_authors_file = "data/quote_authors.txt"
+quote_authors_file = "data/quote_authors.txt"
 advice_file = "data/advice.txt"
 
 def fill_list_from_file(file, list):
