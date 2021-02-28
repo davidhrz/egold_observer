@@ -3,6 +3,8 @@ import discord
 import answers
 import utils
 import graph
+from discord.ext import tasks
+from random import randint, random
 
 # Only enable intents for server info and server messages
 intents = discord.Intents(guilds=True, guild_messages=True)
@@ -11,6 +13,14 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('Logged in as {0.user}.'.format(client))
+    refresh_presence.start()
+
+@tasks.loop(seconds=30.0, count=None)
+async def refresh_presence():
+    value = round(randint(-25, 35) + random(), 2)
+    message = f'eGLD: {value}$'
+    activity = discord.Activity(name=message, type=discord.ActivityType.watching)
+    await client.change_presence(status=discord.Status.online, activity=activity)
 
 @client.event
 async def on_message(message):
