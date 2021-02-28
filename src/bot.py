@@ -2,6 +2,7 @@
 import discord
 import answers
 import utils
+import graph
 
 # Only enable intents for server info and server messages
 intents = discord.Intents(guilds=True, guild_messages=True)
@@ -37,6 +38,14 @@ async def on_message(message):
         print('Refreshing data...')
         answers.refresh_data()
         print('Data refreshed.')
+
+    # Graph command
+    elif message.content.find('graph') != -1:
+        answer = 'Graph over the last **1** day(s)'
+        img_raw = graph.get_graph()
+
+        file = discord.File(img_raw, f'image.png')
+        await message.channel.send(content=answer, file=file)
 
     # Advice command
     else:
