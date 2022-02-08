@@ -11,23 +11,31 @@ def generate_data():
 
     # Generate values going downhill for each datetime
     values = []
+    delta = 0
     for i in range(len(dates)):
         # new value starts at the previous value
-        value = values[i - 1] if i > 0 else randint(100, 200)
+        if i == 0:
+            value = initial_value = randint(400, 500)
+        else:
+            value = values[i - 1]
 
-        # add a random decimal value and round to 2 decimal places
-        value = round(value + random(), 2)
+        # add decimal noise
+        value += random()
 
         # add some variation to the value
-        value += randint(-6, 4)
+        # if abs(delta) >= 120:
+        #     value += randint(0, 10)
+        # else:
+        value += randint(-8, 6)
 
         # amplify the climb or the fall
         if i > 0 and value < values[i - 1]:
-            value -= 10
+            value -= 8
         elif i > 0 and value > values[i - 1]:
-            value += 10
+            value += 8
 
-        values.append(value)
+        values.append(round(value, 2))
+        delta = initial_value - value
 
     return dates, values
 
